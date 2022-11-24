@@ -10,7 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libftprintf.h"
+#include "ft_printf.h"
 
 void	ft_putchar_final(int fd, char c, int size)
 {
@@ -24,6 +24,7 @@ int	ft_formats(va_list args, const char format)
 	i = 0;
 	if (format == 'c')
 		ft_putchar_final(1, va_arg(args, int), 1);
+	return (0);
 }
 
 int	ft_printf(const char *str, ...)
@@ -39,6 +40,7 @@ int	ft_printf(const char *str, ...)
 			ft_formats(ap, str[i + 1]);
 		}
 	va_end (ap);
+	return (i); //Placeholder
 }
 
 /*int add_em_up (int args, ...)
@@ -64,8 +66,9 @@ int main (void)
    This call prints 55.
   printf ("%d\n", add_em_up (10, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10));
   */
- char *str = "Hello";
- ft_printf("%c", str);
+ 	char str = 'H';
+ 	ft_printf("%c", str);
+	printf("\n");
 
   return 0;
 }
