@@ -17,6 +17,13 @@ void	ft_putchar_final(int fd, char c, int size)
 	write(fd, &c, size);
 }
 
+void	ft_putstr_fd(char *s, int fd)
+{
+	if (!s)
+		return ;
+	write(fd, s, strlen(s));
+}
+
 int	ft_formats(va_list args, const char format)
 {
 	int	i;
@@ -24,6 +31,20 @@ int	ft_formats(va_list args, const char format)
 	i = 0;
 	if (format == 'c')
 		ft_putchar_final(1, va_arg(args, int), 1);
+	if (format == 's')
+		ft_putstr_fd(va_arg(args, char *), 1);
+	//if (format == 'p')
+	//if (format == 'd')
+	if (format == 'i')
+		ft_putnbr_fd(va_arg(args, int), 1);
+	//if (format == 'u')
+	//if (format == 'x')
+	//if (format == 'X')
+	if (format == '%')
+	{
+		write(1, "%", 1);
+		ft_putstr_fd(va_arg(args, char *), 1);
+	}
 	return (0);
 }
 
@@ -34,41 +55,30 @@ int	ft_printf(const char *str, ...)
 
 	i = 0;
 	va_start(ap, str);
-	if (str[i] == '%' && str[i + 1] == 'c')
-		{
-			//ft_putchar_final(1, ap, 1);
-			ft_formats(ap, str[i + 1]);
-		}
+	while (str[i])//Placeholder it will need to be While to check for percentage not only on the beginning of the word
+	{
+		if (str[i] == '%')
+			ft_formats(ap, str[i + 1]); //Placeholder It will need a value to count how much character it is printing
+		i++;
+	}
 	va_end (ap);
 	return (i); //Placeholder
 }
 
-/*int add_em_up (int args, ...)
-{
-  va_list ap;
-  int i, sum;
-
-  va_start (ap, args);         Initialize the argument list.
-
-  sum = 0;
-  for (i = 0; i < args; i++)
-    sum += va_arg (ap, int);    Get the next argument value. 
-
-  va_end (ap);                   Clean up.
-  return sum;
-}*/
-
 int main (void)
 {
-  /* This call prints 16.
-  printf ("%d\n", add_em_up (3, 5, 5, 6));
-
-   This call prints 55.
-  printf ("%d\n", add_em_up (10, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10));
-  */
- 	char str = 'H';
- 	ft_printf("%c", str);
-	printf("\n");
+	char ch = 'H';
+	char *str = "Hello";
+	int i = -100;
+	char *stry = "%gfdh";
+ 	ft_printf("%c", ch);
+	printf(" - %%c\n");
+	ft_printf("%s", str);
+	printf(" - %%s\n");
+	ft_printf("%i", i);
+	printf(" - %%i\n");
+	ft_printf("%%dhgg");
+	printf(" - %%\n");
 
   return 0;
 }
