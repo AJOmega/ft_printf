@@ -17,13 +17,6 @@ void	ft_putchar_final(int fd, char c, int size)
 	write(fd, &c, size);
 }
 
-void	ft_putstr_fd(char *s, int fd)
-{
-	if (!s)
-		return ;
-	write(fd, s, ft_strlen(s));
-}
-
 int	ft_formats(va_list args, const char format)
 {
 	int	i;
@@ -67,7 +60,7 @@ int main (void)
 	char ch = 'H';
 	char *str = "Hello";
 	int i = -100;
-	int d = 50;
+	int d = 50.3;
  	ft_printf("%c", ch);
 	printf(" - %%c\n");
 	ft_printf("%s", str);
@@ -77,7 +70,7 @@ int main (void)
 	ft_printf("%%s dhgg", str);
 	printf(" - %%\n");
 	ft_printf("%d");
-	printf(" - %%d\n");
+	printf(" - %d\n", d);
 
   return 0;
 }
