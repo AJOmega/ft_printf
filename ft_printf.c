@@ -21,7 +21,7 @@ void	ft_putstr_fd(char *s, int fd)
 {
 	if (!s)
 		return ;
-	write(fd, s, strlen(s));
+	write(fd, s, ft_strlen(s));
 }
 
 int	ft_formats(va_list args, const char format)
@@ -35,16 +35,13 @@ int	ft_formats(va_list args, const char format)
 		ft_putstr_fd(va_arg(args, char *), 1);
 	//if (format == 'p')
 	//if (format == 'd')
-	if (format == 'i')
-		ft_putnbr_fd(va_arg(args, int), 1);
+	if (format == 'i' || format == 'd')
+		ft_printnbr(va_arg(args, int));
 	//if (format == 'u')
 	//if (format == 'x')
 	//if (format == 'X')
 	if (format == '%')
-	{
 		write(1, "%", 1);
-		ft_putstr_fd(va_arg(args, char *), 1);
-	}
 	return (0);
 }
 
@@ -70,15 +67,17 @@ int main (void)
 	char ch = 'H';
 	char *str = "Hello";
 	int i = -100;
-	char *stry = "%gfdh";
+	int d = 50;
  	ft_printf("%c", ch);
 	printf(" - %%c\n");
 	ft_printf("%s", str);
 	printf(" - %%s\n");
 	ft_printf("%i", i);
 	printf(" - %%i\n");
-	ft_printf("%%dhgg");
+	ft_printf("%%s dhgg", str);
 	printf(" - %%\n");
+	ft_printf("%d");
+	printf(" - %%d\n");
 
   return 0;
 }
