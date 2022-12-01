@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_printf.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jabreu-d <jabreu-d@student.42.fr>          +#+  +:+       +#+        */
+/*   By: jabreu-d <jabreu-d@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/21 15:30:19 by jabreu-d          #+#    #+#             */
-/*   Updated: 2022/11/29 18:12:08 by jabreu-d         ###   ########.fr       */
+/*   Updated: 2022/12/01 19:04:15 by jabreu-d         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,8 @@
 # include <unistd.h>
 # include "Libft/libft.h"
 
-int	ft_printnbr(int n);
-int	ft_printf(const char *str, ...);
+int		ft_printf(const char *str, ...);
+void	ft_unsigned_putnbr(unsigned int nb);
+int		ft_printnbr(int n);
 
 #endif
