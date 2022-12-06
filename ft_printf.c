@@ -12,67 +12,48 @@
 
 #include "ft_printf.h"
 
-void	ft_putchar_final(int fd, char c, int size)
-{
-	write(fd, &c, size);
-}
-
 int	ft_formats(va_list args, const char format)
 {
-	int	i;
+	int	count;
 
-	i = 0;
+	count = 0;
 	if (format == 'c')
-		ft_putchar_final(1, va_arg(args, int), 1);
+		count += ft_putchar_fd(va_arg(args, int), 1);
 	if (format == 's')
-		ft_putstr_fd(va_arg(args, char *), 1);
-	//if (format == 'p')
+		count += ft_putstr_fd(va_arg(args, char *), 1);
+	if (format == 'p')
+		count += ft_printpoint(va_arg(args, t_ull));
 	if (format == 'i' || format == 'd')
-		ft_putnbr_fd(va_arg(args, int), 1);
+		count += ft_putnbr_fd(va_arg(args, int), 1);
 	if (format == 'u')
-		ft_unsigned_putnbr(va_arg(args, int));
-	//if (format == 'x')
-	//if (format == 'X')
+		count += ft_unsigned_putnbr(va_arg(args, unsigned int));
+	if (format == 'x' || format == 'X')
+		count += ft_printhex(va_arg(args, unsigned int), format);
 	if (format == '%')
-		write(1, "%", 1);
-	return (0);
+		count += ft_putchar_fd('%', 1);
+	return (count);
 }
 
 int	ft_printf(const char *str, ...)
 {
 	va_list	ap;
 	int		i;
+	int		count;
 
+	count = 0;
 	i = 0;
 	va_start(ap, str);
-	while (str[i])//Placeholder it will need to be While to check for percentage not only on the beginning of the word
+	while (str[i])
 	{
 		if (str[i] == '%')
-			ft_formats(ap, str[i + 1]); //Placeholder It will need a value to count how much character it is printing
+		{
+			count += ft_formats(ap, str[i + 1]);
+			i++;
+		}
+		else
+			count += ft_putchar_fd(str[i], 1);
 		i++;
 	}
 	va_end (ap);
-	return (i); //Placeholder
-}
-
-int main (void)
-{
-	char ch = 'H';
-	char *str = "Hello";
-	int i = -100;
-	int d = 50;
- 	ft_printf("%c", ch);
-	printf(" - %%c\n");
-	ft_printf("%s", str);
-	printf(" - %%s\n");
-	ft_printf("%i", i);
-	printf(" - %%i\n");
-	ft_printf("%%s dhgg", str);
-	printf(" - %%\n");
-	ft_printf("%d", d);
-	printf(" - %%d\n");
-	ft_printf("%u", d);
-	printf(" - %%u\n");
-
-  return 0;
+	return (count);
 }

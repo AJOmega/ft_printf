@@ -1,25 +1,25 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_putstr_fd.c                                     :+:      :+:    :+:   */
+/*   ft_printpoint.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jabreu-d <jabreu-d@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/11/07 15:46:44 by jabreu-d          #+#    #+#             */
-/*   Updated: 2022/12/06 20:31:32 by jabreu-d         ###   ########.fr       */
+/*   Created: 2022/12/06 20:07:13 by jabreu-d          #+#    #+#             */
+/*   Updated: 2022/12/06 20:30:20 by jabreu-d         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-//#include "libft.h"
 #include "ft_printf.h"
 
-size_t	ft_putstr_fd(char *s, int fd)
+int	ft_printpoint(t_ull n)
 {
-	int	len;
+	int	count;
 
-	if (!s)
-		return (ft_putstr_fd("(null)", 1));
-	len = ft_strlen(s);
-	write(fd, s, len);
-	return (len);
+	count = 0;
+	if (!n)
+		return (ft_putstr_fd("(nil)", 1));
+	count += ft_putstr_fd("0x", 1);
+	count += ft_printhex(n, 'x');
+	return (count);
 }

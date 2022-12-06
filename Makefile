@@ -6,9 +6,8 @@ CFLAGS = -Wall -Wextra -Werror
 
 RM = rm -f
 
-SRC = ft_printf.c ft_printnbr.c ft_strlen.c ft_putchar_fd.c\
-	ft_unsigned_putnbr.c ft_putstr_fd.c ft_putendl_fd.c\
-	ft_putnbr_fd.c\
+SRC = ft_printf.c ft_strlen.c ft_putchar_fd.c\
+	ft_unsigned_putnbr.c ft_putstr_fd.c ft_putnbr_fd.c ft_printhex.c ft_printpoint.c\
 
 OBJ = $(SRC:.c=.o)
 
