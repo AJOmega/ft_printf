@@ -6,16 +6,20 @@
 /*   By: jabreu-d <jabreu-d@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/07 15:46:44 by jabreu-d          #+#    #+#             */
-/*   Updated: 2022/12/05 16:07:55 by jabreu-d         ###   ########.fr       */
+/*   Updated: 2022/12/06 16:34:17 by jabreu-d         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 //#include "libft.h"
 #include "ft_printf.h"
 
-void	ft_putstr_fd(char *s, int fd)
+size_t	ft_putstr_fd(char *s, int fd)
 {
+	size_t	len;
+
+	len = ft_strlen(s);
 	if (!s)
-		return ;
-	write(fd, s, ft_strlen(s));
+		return (0);
+	write(fd, s, len);
+	return (len);
 }
